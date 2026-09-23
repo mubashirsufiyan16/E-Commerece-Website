@@ -1,5 +1,5 @@
 import { Card, Button,Modal,Input,Form } from "antd";
-import { Navigate, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 function CheckOut() {

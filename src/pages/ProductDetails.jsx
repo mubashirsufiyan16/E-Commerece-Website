@@ -1,8 +1,8 @@
-import { Button, Card, Modal } from "antd";
+import { Button, Card, Modal,Result } from "antd";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import products from "../data/Products";
-import CheckOut from "./CheckOut";
+
 
 function ProductDetails() {
   const { id } = useParams();
@@ -15,7 +15,15 @@ function ProductDetails() {
   );
 
   if (!product) {
-    return <h1>Product Not Found</h1>;
+    return <Result style={{
+      fontSize:"40px",
+      fontFamily:"-moz-initial",
+      justifyContent:"center",
+      textAlign:"center",
+    }}
+    status="error"
+    >Product Not Found
+    </Result>
   }
 
   return (

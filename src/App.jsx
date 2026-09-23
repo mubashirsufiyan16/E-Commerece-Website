@@ -5,6 +5,7 @@ import Home from "./pages/Home.jsx";
 import Cart from "./components/Cart.jsx";
 import CheckOut from "./pages/CheckOut.jsx";
 import Order from "./pages/Order.jsx"
+import ProductDetails from "./pages/ProductDetails.jsx";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/Cart" element={<Cart/>}/>
         <Route path="checkout" element={<CheckOut />}/>
         <Route path="/Order" element={<Order />}/>
+        <Route path="/product/:id" element={<ProductDetails />} />
       </Routes>
     </BrowserRouter>
   );

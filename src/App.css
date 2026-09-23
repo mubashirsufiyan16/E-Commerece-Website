@@ -1,5 +1,5 @@
 body{
-    background-color: lightslategray;
+    background-color: lightgrey;
 }
 .login {
   min-height: 100vh;
@@ -133,3 +133,4 @@ body{
   object-fit: cover;
   border-radius: 15px;
 }
+
