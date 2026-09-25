@@ -1,70 +1,143 @@
-import { Card, Button,Modal,Input,Form } from "antd";
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { Button, Input, Form } from "antd";
+import { useNavigate } from "react-router-dom";
 
 function CheckOut() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const { state } = useLocation();
-  const navigate=useNavigate()
-    const handleOrder=()=>{
-      navigate("/Order")
-    }
-  const product = state.product;
-  const quantity = state.quantity;
+  const navigate = useNavigate();
 
-  const handlePlaceOrder = () => {
-    setIsModalOpen(true);
-  }
+  const orderedProduct = JSON.parse(localStorage.getItem("ORDEREDPRODUCT"));
+
+  const moveToOrder = () => {
+    navigate("/Order");
+  };
+
   return (
-    <div style={{ padding: "40px",
-        display:"flex",
-        justifyContent:"center"
-     }}>
-      <Card title="Order Summary" style={{ width: "400px" }}>
-        <img
-          src={product.image}
-          alt={product.title}
-          style={{
-            width: "250px",
-            height: "250px",
-            objectFit: "cover",
-          }}
-        />
-
-        <h2>{product.title}</h2>
-
-        <p>Price: Rs. {product.price}</p>
-
-        <p>Quantity: {quantity}</p>
-
-        <h2>Total: Rs. {product.price * quantity}</h2>
-
-        <Button type="primary" onClick={handlePlaceOrder}>
-          Place Order
-        </Button>
-      </Card>
-      <Modal
-        title="User Information"
-        open={isModalOpen}
-        onCancel={() => setIsModalOpen(false)}
-        footer={null}
+    <>
+      <h1
+        style={{
+          backgroundColor: "white",
+          padding: "10px",
+          borderRadius: "20px",
+          display: "flex",
+          justifyContent: "center",
+          textTransform: "uppercase",
+          fontFamily: "math",
+          fontSize: "50px",
+          fontWeight: "1000",
+        }}
       >
-        <Form>
-          <Input style={{margin:"10px"}} type="text" placeholder="Full Name" required />
-          <br />
-          <Input style={{margin:"10px"}}  type="email" placeholder="Email" required />
-          <br />
-          <Input style={{margin:"10px"}}  type="number" placeholder="Phone" required />
-          <br />
-          <Input.TextArea style={{margin:"10px"}}  placeholder="Address" required />
-          <br />
-          <Button onClick={handleOrder}
-        style={{display:"flex",justifyContent:"center"}}
-        type="primary"
-        >Confirm Order</Button>
-        </Form>
-      </Modal>
-    </div>
+        Check Out Page
+      </h1>
+
+      <div
+        style={{
+          padding: "30px",
+        }}
+      >
+        {orderedProduct && (
+          <div
+            style={{
+              display: "flex",
+              alignItems: "flex-start",
+              gap: "30px",
+            }}
+          >
+            <div
+              style={{
+                width: "30%",
+                flexShrink: 0,
+                fontSize: "20px",
+              }}
+            >
+              <img
+                src={orderedProduct.image}
+                alt={orderedProduct.title}
+                style={{
+                  width: "70%",
+                  borderRadius: "10px",
+                  display: "block",
+                }}
+              />
+
+              <h2
+                style={{
+                  fontSize: "35px",
+                  marginTop: "20px",
+                }}
+              >
+                {orderedProduct.title}
+              </h2>
+
+              <p>Price: Rs. {orderedProduct.price}</p>
+
+              <p>Category: {orderedProduct.category}</p>
+
+              <p>Quantity: {orderedProduct.quantity}</p>
+
+              <h2>
+                Total: Rs. {orderedProduct.price * orderedProduct.quantity}
+              </h2>
+            </div>
+
+            <Form
+              style={{
+                flex: 1,
+                backgroundColor: "white",
+                padding: "20px",
+                marginTop: "50px",
+                fontSize: "20px",
+                paddingBottom: "40px",
+                boxShadow: "10px 10px 40px black",
+                borderRadius: "10px",
+                boxSizing: "border-box",
+              }}
+            >
+              <h3
+                style={{
+                  fontFamily: "fantasy",
+                  fontSize: "40px",
+                  margin: "0 0 20px 0",
+                  textAlign: "center",
+                }}
+              >
+                User Information
+              </h3>
+
+              <Input placeholder="First Name" />
+              <br />
+              <br />
+
+              <Input placeholder="Last Name" />
+              <br />
+              <br />
+
+              <Input placeholder="Address" />
+              <br />
+              <br />
+
+              <Input placeholder="City" />
+              <br />
+              <br />
+
+              <Input placeholder="Phone" />
+              <br />
+              <br />
+
+              <Button
+                type="primary"
+                onClick={moveToOrder}
+                style={{
+                  width: "100%",
+                  padding: "25px",
+                  fontSize: "30px",
+                }}
+              >
+                Confirm Order
+              </Button>
+            </Form>
+          </div>
+        )}
+      </div>
+    </>
   );
 }
 

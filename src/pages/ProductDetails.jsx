@@ -1,18 +1,23 @@
 import { Button, Card, Modal,Result } from "antd";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useState } from "react";
 import products from "../data/Products";
+import AddToCart from "./AddToCart";
 
 
 function ProductDetails() {
   const { id } = useParams();
-
+  const navigate=useNavigate()
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [quantity,setQuantity]=useState(1)
 
   const product = products.find(
     (item) => item.id === Number(id)
   );
+
+  const handlePageChange=()=>{
+    navigate("/AddToCart")
+  }
 
   if (!product) {
     return <Result style={{
@@ -48,10 +53,11 @@ function ProductDetails() {
 
           <Button
             type="primary"
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {handlePageChange}}
           >
             Add To Cart
           </Button>
+          <AddToCart/>
           <Modal
   title="Product Added"
   open={isModalOpen}

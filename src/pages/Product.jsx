@@ -1,27 +1,35 @@
-import { Card, Button, Modal } from "antd";
+import { Card, Button, Modal, Badge } from "antd";
 import { useState } from "react";
 import "../App.css";
 import products from "../data/Products";
-import CheckOut from "./CheckOut";
-import { useNavigate } from "react-router-dom";
 
-function Product() {
-  const [quantity, setQuantity] = useState(1);
+function Product({ setQuantity, quantity = 0 }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const navigate=useNavigate()
 
-const handleCheckOut = () => {
-  navigate("/checkout", {
-    state: {
-      product: selectedProduct,
-      quantity: quantity,
-    },
-  });
-};
+  const [productQuantity, setProductQuantity] = useState(1);
+
   const handleAddToCart = (product) => {
     setSelectedProduct(product);
+    setProductQuantity(1);
     setIsModalOpen(true);
+  };
+
+  const MoveToCart = () => {
+    const oldCart = JSON.parse(localStorage.getItem("cartProduct")) || [];
+
+    const newProduct = {
+      ...selectedProduct,
+      quantity: productQuantity,
+    };
+
+    oldCart.push(newProduct);
+
+    setQuantity(oldCart.length);
+
+    localStorage.setItem("cartProduct", JSON.stringify(oldCart));
+
+    setIsModalOpen(false);
   };
 
   return (
@@ -36,44 +44,35 @@ const handleCheckOut = () => {
       >
         {products.map((product) => (
           <Card
-            className="productCard"
             key={product.id}
             title={product.title}
             style={{
-            width: 300,
-            border: "1px solid black",
+              width: 300,
+              border: "1px solid black",
             }}
           >
             <img
               src={product.image}
               alt={product.title}
-              style={{ width: "100%" }}
+              style={{
+                width: "100%",
+                borderRadius: "10px",
+              }}
             />
 
-            <p
-              style={{
-                fontSize: "25px",
-                fontFamily: "fangsong",
-              }}
-            >
-              Price: Rs. {product.price}
-            </p>
+            <p>Price: Rs. {product.price}</p>
 
-            <p
-              style={{
-                fontSize: "25px",
-                fontFamily: "fangsong",
-                color: "gray",
-              }}
-            >
-              Category: {product.category}
-            </p>
+            <p>Category: {product.category}</p>
 
             <Button
+              style={{
+                backgroundColor: "blue",
+                color: "white",
+                fontSize: "20px",
+              }}
               onClick={() => handleAddToCart(product)}
-              className="buttons"
             >
-              Add To Cart
+              Product Details
             </Button>
           </Card>
         ))}
@@ -84,34 +83,38 @@ const handleCheckOut = () => {
         open={isModalOpen}
         onCancel={() => setIsModalOpen(false)}
         footer={[
-
-          <Button
-            key="cart"
-            type="primary"
-            onClick={() => handleCheckOut()}
-          >
-            Check Out
+          <Button key="cart" type="primary" onClick={MoveToCart}>
+            Add To Cart
           </Button>,
         ]}
       >
         {selectedProduct && (
           <>
             <h3>{selectedProduct.title}</h3>
+
             <p>Price: Rs. {selectedProduct.price}</p>
-            <p>Product successfully added to your cart.</p>
+
             <Button
               onClick={() => {
-                if (quantity > 1) {
-                  setQuantity(Number(quantity - 1));
+                if (productQuantity > 1) {
+                  setProductQuantity(productQuantity - 1);
                 }
               }}
             >
               -
             </Button>
-            <span style={{ margin: "0 15px" }}>{quantity}</span>
 
-            <Button onClick={() => setQuantity( Number(quantity + 1))}>+</Button>
-            <h2>Total price: {selectedProduct.price * quantity}</h2> 
+            <span style={{ margin: "0 15px" }}>{productQuantity}</span>
+
+            <Button
+              onClick={() => setProductQuantity(productQuantity + 1)}
+            >
+              +
+            </Button>
+
+            <h2>
+              Total: Rs. {selectedProduct.price * productQuantity}
+            </h2>
           </>
         )}
       </Modal>

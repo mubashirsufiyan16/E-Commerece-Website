@@ -37,9 +37,8 @@ body{
   cursor: pointer;
 }
 .nav{
-    background: #000;
+    background: black;
     color:white;
-
     margin:4px;
     border-radius: 20px;
     display: flex;
@@ -133,4 +132,5 @@ body{
   object-fit: cover;
   border-radius: 15px;
 }
+
 

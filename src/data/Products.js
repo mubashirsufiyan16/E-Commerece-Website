@@ -119,14 +119,7 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&h=800&fit=crop",
   },
-  {
-    id: 16,
-    title: "Brown Leather Bag",
-    price: 4599,
-    category: "Bags",
-    image:
-      "https://images.unsplash.com/photo-155 handbag? w=600",
-  },
+
   {
     id: 17,
     title: "Wireless Headphones",
@@ -135,6 +128,14 @@ const products = [
     image:
       "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=600&h=800&fit=crop",
   },
+  {
+  id: 16,
+  title: "Men's Leather Wallet",
+  price: 2499,
+  category: "Men's Accessories",
+  image:
+    "https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&h=800&fit=crop"
+},
   {
     id: 18,
     title: "Black Sunglasses",
