@@ -6,6 +6,7 @@ import CheckOut from "./pages/CheckOut.jsx";
 import Order from "./pages/Order.jsx"
 import AddToCart from "./pages/AddToCart.jsx";
 import Product from "./pages/Product.jsx";
+import NotFount from "./components/NotFound.jsx"
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path="/Order" element={<Order />}/>
         <Route path="/product" element={<Product/>}/>
         <Route path="/AddToCart" element={<AddToCart />} />
+        <Route path="*" element={<NotFount/>}/>
       </Routes>
     </BrowserRouter>
     </>
