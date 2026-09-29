@@ -42,7 +42,7 @@ const products = [
   {
     id: 6,
     title: "Black Leather Jacket",
-    price: 6999,
+    price: 8999,
     category: "Jackets",
     image:
       "https://images.unsplash.com/photo-1521223890158-f9f7c3d5d504?w=600&h=800&fit=crop",
@@ -50,7 +50,7 @@ const products = [
   {
     id: 7,
     title: "Classic Blue Jeans",
-    price: 2999,
+    price: 1999,
     category: "Jeans",
     image:
       "https://images.unsplash.com/photo-1542272604-787c3835535d?w=600&h=800&fit=crop",
@@ -58,14 +58,14 @@ const products = [
   {
     id: 8,
     title: "Black Slim Jeans",
-    price: 3199,
+    price: 2199,
     category: "Jeans",
     image:
       "https://images.unsplash.com/photo-1555689502-c4b22d76c56f?w=600&h=800&fit=crop",
   },
   {
     id: 9,
-    title: "Black Hoodie",
+    title: "Gray Hoodie",
     price: 3299,
     category: "Hoodies",
     image:
@@ -73,7 +73,7 @@ const products = [
   },
   {
     id: 10,
-    title: "Grey Oversized Hoodie",
+    title: "Orange Oversized Hoodie",
     price: 3499,
     category: "Hoodies",
     image:
@@ -81,7 +81,7 @@ const products = [
   },
   {
     id: 11,
-    title: "White Sneakers",
+    title: "Red Joggers",
     price: 3999,
     category: "Shoes",
     image:
@@ -131,7 +131,7 @@ const products = [
   {
   id: 16,
   title: "Men's Leather Wallet",
-  price: 2499,
+  price: 799,
   category: "Men's Accessories",
   image:
     "https://images.unsplash.com/photo-1627123424574-724758594e93?w=600&h=800&fit=crop"

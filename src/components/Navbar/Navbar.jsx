@@ -1,13 +1,22 @@
+
 import { useNavigate, useLocation } from "react-router-dom";
+
 import { Button, Badge } from "antd";
+
 import Product from "../../pages/Product.jsx";
+
 import quantity from "../../pages/Product.jsx";
+import AddToCart from "../../pages/AddToCart.jsx"
+
 import { useEffect, useState } from "react";
 
 import "../../App.css";
+
 function Navbar() {
   const navigate = useNavigate();
+
   let { state } = useLocation();
+
   let cartCount = JSON.parse(localStorage.getItem("cartProduct")) || [];
 
   const [badgeValue, setBadgeValue] = useState(0);
@@ -19,6 +28,7 @@ function Navbar() {
   const handleLogOut = () => {
     navigate("/login");
   };
+
   const handleCart = () => {
     navigate(
       "/AddToCart",
@@ -27,7 +37,6 @@ function Navbar() {
         quantity: quantity,
       }),
     );
-
   };
 
   return (
@@ -43,14 +52,16 @@ function Navbar() {
             DASHBOARD
           </h3>
         </ul>
+
         <div>
           <Button
             style={{
-              backgroundColor: "blue",
+              backgroundColor: "#1677ff",
               color: "white",
-              fontFamily: "emoji",
               fontSize: "30px",
               padding: "20px",
+              fontFamily: "math",
+              textTransform: "capitalize",
             }}
             onClick={handleLogOut}
             id="logoutbtn"

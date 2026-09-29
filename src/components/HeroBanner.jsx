@@ -14,7 +14,14 @@ function HeroBanner() {
 
         <span>Discover amazing products at the best prices.</span>
 
-        <button style={{fontSize:"20px"}} className="buttons">Shop Now</button>
+        <button 
+        style={{fontSize:"20px",
+        backgroundColor:"#1677ff",
+        color:"white",
+        fontSize:"30px",
+        fontFamily:"math",
+
+        }}>Shop Now</button>
       </div>
 
       <div className="hero-image">

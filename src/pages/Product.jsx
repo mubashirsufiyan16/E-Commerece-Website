@@ -66,9 +66,11 @@ function Product({ setQuantity, quantity = 0 }) {
 
             <Button
               style={{
-                backgroundColor: "blue",
+                backgroundColor: "#1677ff",
                 color: "white",
-                fontSize: "20px",
+                fontSize: "25px",
+                fontFamily:"emoji",
+                padding:"20px"
               }}
               onClick={() => handleAddToCart(product)}
             >

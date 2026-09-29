@@ -13,7 +13,7 @@ function Home() {
       <Navbar quantity={quantity} />
       <HeroBanner />
       <Product quantity={quantity} setQuantity={setQuantity} />
-    </div>
+     </div>
   );
 }
 

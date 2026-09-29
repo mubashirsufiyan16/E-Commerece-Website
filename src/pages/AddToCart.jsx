@@ -1,42 +1,21 @@
-import { useLocation,useNavigate } from "react-router-dom";
-import { Card, Button,Result } from "antd";
+import { useNavigate } from "react-router-dom";
+import { Card, Button, Result } from "antd";
 import { useState } from "react";
 
 function AddToCart() {
-  const navigate=useNavigate()
-  const { state } = useLocation();
-  const product = state?.product;
-  const quantity = state?.quantity || 1;
+  const navigate = useNavigate();
 
   const [cart, setCart] = useState(() => {
     return JSON.parse(localStorage.getItem("cartProduct")) || [];
   });
 
-  const moveToDashboard=()=>{
-    navigate("/dashboard")
-  }
-  if (product) {
-    const alreadyAdded = cart.some(
-      (item) => item.id === product.id
-    );
+  const moveToDashboard = () => {
+    navigate("/dashboard");
+  };
 
-    if (!alreadyAdded) {
-      const newCart = [
-        ...cart,
-        {
-          ...product,
-          quantity: quantity,
-        },
-      ];
-
-      localStorage.setItem(
-        "cartProduct",
-        JSON.stringify(newCart)
-      );
-
-      setCart(newCart);
-    }
-  }
+  const goToCheckout = () => {
+    navigate("/CheckOut");
+  };
 
   const increaseQuantity = (id) => {
     const updatedCart = cart.map((item) => {
@@ -77,17 +56,9 @@ function AddToCart() {
       JSON.stringify(updatedCart)
     );
   };
-  const placeOrder=(product)=>{
-    const orderedProduct=JSON.stringify(product)
-    localStorage.setItem("ORDEREDPRODUCT",orderedProduct)
-    console.log(orderedProduct)
-    navigate("/CheckOut")
-  }
-  const removeItem = (id) => {
-    const oldCart =
-      JSON.parse(localStorage.getItem("cartProduct")) || [];
 
-    const updatedCart = oldCart.filter(
+  const removeItem = (id) => {
+    const updatedCart = cart.filter(
       (item) => item.id !== id
     );
 
@@ -100,36 +71,60 @@ function AddToCart() {
   };
 
   if (cart.length === 0) {
-    return(
-    <Result
-    status="403"
-    title="Cart Is Empty!"
-       extra={[
-        <Button
-        key="continue"
-          type="primary"
-          onClick={() => navigate("/dashboard")}
-        >
-          Continue Shopping
-        </Button>
-      ]}
-    />
-     )
-     
-    }
+    return (
+      <Result
+        status="403"
+        title="Cart Is Empty!"
+        extra={[
+          <Button
+            type="primary"
+            onClick={() => navigate("/dashboard")}
+          >
+            Continue Shopping
+          </Button>,
+        ]}
+      />
+    );
+  }
 
   return (
     <>
-    <Button onClick={()=>{moveToDashboard()}} style={{
-      backgroundColor:"blue",
-      color:"white",
-      fontSize:"30px",
-      fontFamily:"emoji",
-      padding:"15px",
-      margin:"10px",
-      border:"1px solid transparent",
-      borderRadius:"15px"
-    }}>Back</Button>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-between",
+          padding: "10px",
+        }}
+      >
+        <Button
+          onClick={moveToDashboard}
+          style={{
+            backgroundColor: "#1677ff",
+            color: "white",
+            fontSize: "20px",
+            padding: "20px",
+            border: "1px solid transparent",
+            borderRadius: "10px",
+          }}
+        >
+          Back
+        </Button>
+
+        <Button
+          onClick={goToCheckout}
+          style={{
+            backgroundColor: "#1677ff",
+            color: "white",
+            fontSize: "20px",
+            padding: "20px",
+            border: "1px solid transparent",
+            borderRadius: "10px",
+          }}
+        >
+          Checkout
+        </Button>
+      </div>
+
       <div
         style={{
           display: "flex",
@@ -140,97 +135,98 @@ function AddToCart() {
       >
         {cart.map((product, index) => (
           <Card
-            key={`${product.id}-${index}`}   
-            
+            key={`${product.id}-${index}`}
             style={{
-              width: 350,
+              width: 400,
               border: "1px solid black",
-              justifyContent:"center"
             }}
-            
           >
-            <p style={{
-              fontFamily:"revert",
-              fontSize:"22px",
-              fontWeight:"700",
-              display:"flex",
-              textAlign:"center",
-              justifyContent:"center",
-            }}>{product.title}</p>
+            <p
+              style={{
+                fontFamily: "revert",
+                fontSize: "22px",
+                fontWeight: "700",
+                display: "flex",
+                textAlign: "center",
+                justifyContent: "center",
+              }}
+            >
+              {product.title}
+            </p>
+
             <img
               src={product.image}
               alt={product.title}
               style={{
                 width: "100%",
-                display:"flex",
+                display: "flex",
                 borderRadius: "10px",
               }}
             />
-          <div style={{
-              fontSize:"20px",
-              fontWeight:"600",
-              color:"black",
-              fontFamily:"fangsong",
-              justifyContent:"center",
-              textAlign:"center"}}>
-            <p>Price: Rs. {product.price}</p>
 
-            <p>Category: {product.category}</p>
-           
-
-            <Button
-              onClick={() => decreaseQuantity(product.id)}
+            <div
+              style={{
+                fontSize: "20px",
+                fontWeight: "600",
+                color: "black",
+                fontFamily: "fangsong",
+                textAlign: "center",
+              }}
             >
-              -
-            </Button>
+              <p>Price: Rs. {product.price}</p>
 
-            <span style={{ margin: "0 15px" }}>
-              {product.quantity}
-            </span>
-            <Button
-              onClick={() => increaseQuantity(product.id)}
-              >
-              +
-            </Button>
+              <p>Category: {product.category}</p>
+
+              <div>
+                <Button
+                  onClick={() =>
+                    decreaseQuantity(product.id)
+                  }
+                >
+                  -
+                </Button>
+
+                <span style={{ margin: "0 15px" }}>
+                  {product.quantity}
+                </span>
+
+                <Button
+                  onClick={() =>
+                    increaseQuantity(product.id)
+                  }
+                >
+                  +
+                </Button>
               </div>
+            </div>
 
             <br />
-            <br />
-              <div style={{
-                display:"flex",
-                gap:"20px"
-              }}>
-            <Button
-              onClick={() => removeItem(product.id)}
-              style={{
-                backgroundColor: "blue",
-                color: "white",
-                fontSize: "22px",
-                marginBottom:"10px",
-                fontFamily:"emoji"
-              }}
-            >
-              Remove Item
-            </Button>
 
-            <Button
-              onClick={() => {placeOrder(product)}}
-              
+            <div
               style={{
-                backgroundColor: "blue",
-                color: "white",
-                fontSize: "22px",
-                fontFamily:"emoji"
+                display: "flex",
+                justifyContent: "center",
               }}
             >
-              Place Order
-            </Button>
-        </div>
+              <Button
+                onClick={() =>
+                  removeItem(product.id)
+                }
+                style={{
+                  backgroundColor: "#1677ff",
+                  color: "white",
+                  fontSize: "18px",
+                  padding: "20px",
+                }}
+              >
+                Remove Item
+              </Button>
+            </div>
           </Card>
         ))}
       </div>
     </>
-  )
+  );
 }
 
 export default AddToCart;

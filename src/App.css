@@ -1,5 +1,5 @@
 body{
-    background-color: lightgrey;
+    background-color: rgb(227, 225, 225);
 }
 .login {
   min-height: 100vh;
@@ -37,7 +37,7 @@ body{
   cursor: pointer;
 }
 .nav{
-    background: black;
+    background: linear-gradient(135deg, #111, #333);
     color:white;
     margin:4px;
     border-radius: 20px;
@@ -63,7 +63,7 @@ body{
 }
 #logoutbtn{
     font-size: 20px;
-    border: 1px solid black;
+    border: 1px solid transparent;
     border-radius: 15px;
     padding: 9px;
     background-color: rgb(37, 164, 243);
