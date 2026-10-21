@@ -4,10 +4,26 @@ import { useState } from "react";
 
 function CheckOut() {
   const navigate = useNavigate();
+   interface CartProduct {
+    id: number;
+    title: string;
+    image: string;
+    price: number;
+    category: string;
+    quantity: number;
+  }
+  interface formData{
+    firstName:string,
+    lastName:string,
+    address:string,
+    city:string,
+    postalCode:string,
+    phone:number
+  }
 
-  const [cart, setCart] = useState(() => {
-    return JSON.parse(localStorage.getItem("cartProduct")) || [];
-  });
+const [cart, setCart] = useState<CartProduct[]>(() => {
+  return JSON.parse(localStorage.getItem("cartProduct") || "[]");
+});
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -19,7 +35,15 @@ function CheckOut() {
     phone: "",
   });
 
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState({
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    city: "",
+    postalCode: "",
+    phone: "",
+  });
 
   const shipping = 199;
 
@@ -32,7 +56,7 @@ function CheckOut() {
   const totalPrice = subtotal + shipping;
 
   // Input ki value state mein save karna
-  const handleChange = (e) => {
+  const handleChange = (e:any) :void => {
     const name = e.target.name;
     const value = e.target.value;
 
@@ -43,8 +67,16 @@ function CheckOut() {
   };
 
   // Form validation
-  const validateForm = () => {
-    const newErrors = {};
+  const validateForm = () :string | boolean => {
+    const newErrors = {
+    firstName: "",
+    lastName: "",
+    address: "",
+    apartment: "",
+    city: "",
+    postalCode: "",
+    phone: "",
+    };
 
     if (formData.firstName === "") {
       newErrors.firstName = "First Name is required";
@@ -70,15 +102,15 @@ function CheckOut() {
 
     setErrors(newErrors);
 
-    if (Object.keys(newErrors).length > 0) {
-      return false;
+    if (Object.keys(newErrors).length > 0)  {
+      return  false;
     }
 
     return true;
   };
 
   // Confirm Order
-  const confirmOrder = (e) => {
+  const confirmOrder = (e:any)  => {
     e.preventDefault();
 
     const isValid = validateForm();
@@ -386,6 +418,7 @@ function CheckOut() {
               type="primary"
               htmlType="submit"
               size="large"
+              onClick={() => navigate("/Order")}
               style={{
                 width: "100%",
                 height: "55px",

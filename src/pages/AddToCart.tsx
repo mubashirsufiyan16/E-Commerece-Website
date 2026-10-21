@@ -2,12 +2,26 @@ import { useNavigate } from "react-router-dom";
 import { Card, Button, Result } from "antd";
 import { useState } from "react";
 
+interface CartProduct {
+  id: number;
+  title: string;
+  image: string;
+  price: number;
+  category: string;
+  quantity: number;
+}
+
 function AddToCart() {
   const navigate = useNavigate();
 
-  const [cart, setCart] = useState(() => {
-    return JSON.parse(localStorage.getItem("cartProduct")) || [];
+  const [cart, setCart] = useState<CartProduct[]>(() => {
+    return JSON.parse(localStorage.getItem("cartProduct") || "[]");
   });
+
+  const updateCart = (updatedCart: CartProduct[]) => {
+    setCart(updatedCart);
+    localStorage.setItem("cartProduct", JSON.stringify(updatedCart));
+  };
 
   const moveToDashboard = () => {
     navigate("/dashboard");
@@ -17,57 +31,29 @@ function AddToCart() {
     navigate("/CheckOut");
   };
 
-  const increaseQuantity = (id) => {
-    const updatedCart = cart.map((item) => {
-      if (item.id === id) {
-        return {
-          ...item,
-          quantity: item.quantity + 1,
-        };
-      }
-
-      return item;
-    });
-
-    setCart(updatedCart);
-
-    localStorage.setItem(
-      "cartProduct",
-      JSON.stringify(updatedCart)
+  const increaseQuantity = (id: number) => {
+    const updatedCart = cart.map((item) =>
+      item.id === id
+        ? { ...item, quantity: item.quantity + 1 }
+        : item
     );
+
+    updateCart(updatedCart);
   };
 
-  const decreaseQuantity = (id) => {
-    const updatedCart = cart.map((item) => {
-      if (item.id === id && item.quantity > 1) {
-        return {
-          ...item,
-          quantity: item.quantity - 1,
-        };
-      }
-
-      return item;
-    });
-
-    setCart(updatedCart);
-
-    localStorage.setItem(
-      "cartProduct",
-      JSON.stringify(updatedCart)
+  const decreaseQuantity = (id: number) => {
+    const updatedCart = cart.map((item) =>
+      item.id === id && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
     );
+
+    updateCart(updatedCart);
   };
 
-  const removeItem = (id) => {
-    const updatedCart = cart.filter(
-      (item) => item.id !== id
-    );
-
-    setCart(updatedCart);
-
-    localStorage.setItem(
-      "cartProduct",
-      JSON.stringify(updatedCart)
-    );
+  const removeItem = (id: number) => {
+    const updatedCart = cart.filter((item) => item.id !== id);
+    updateCart(updatedCart);
   };
 
   if (cart.length === 0) {
@@ -77,8 +63,9 @@ function AddToCart() {
         title="Cart Is Empty!"
         extra={[
           <Button
+            key="shopping"
             type="primary"
-            onClick={() => navigate("/dashboard")}
+            onClick={moveToDashboard}
           >
             Continue Shopping
           </Button>,
@@ -103,7 +90,6 @@ function AddToCart() {
             color: "white",
             fontSize: "20px",
             padding: "20px",
-            border: "1px solid transparent",
             borderRadius: "10px",
           }}
         >
@@ -117,7 +103,6 @@ function AddToCart() {
             color: "white",
             fontSize: "20px",
             padding: "20px",
-            border: "1px solid transparent",
             borderRadius: "10px",
           }}
         >
@@ -143,12 +128,9 @@ function AddToCart() {
           >
             <p
               style={{
-                fontFamily: "revert",
                 fontSize: "22px",
-                fontWeight: "700",
-                display: "flex",
+                fontWeight: 700,
                 textAlign: "center",
-                justifyContent: "center",
               }}
             >
               {product.title}
@@ -159,7 +141,6 @@ function AddToCart() {
               alt={product.title}
               style={{
                 width: "100%",
-                display: "flex",
                 borderRadius: "10px",
               }}
             />
@@ -167,21 +148,16 @@ function AddToCart() {
             <div
               style={{
                 fontSize: "20px",
-                fontWeight: "600",
-                color: "black",
-                fontFamily: "fangsong",
+                fontWeight: 600,
                 textAlign: "center",
               }}
             >
               <p>Price: Rs. {product.price}</p>
-
               <p>Category: {product.category}</p>
 
               <div>
                 <Button
-                  onClick={() =>
-                    decreaseQuantity(product.id)
-                  }
+                  onClick={() => decreaseQuantity(product.id)}
                 >
                   -
                 </Button>
@@ -191,9 +167,7 @@ function AddToCart() {
                 </span>
 
                 <Button
-                  onClick={() =>
-                    increaseQuantity(product.id)
-                  }
+                  onClick={() => increaseQuantity(product.id)}
                 >
                   +
                 </Button>
@@ -209,9 +183,7 @@ function AddToCart() {
               }}
             >
               <Button
-                onClick={() =>
-                  removeItem(product.id)
-                }
+                onClick={() => removeItem(product.id)}
                 style={{
                   backgroundColor: "#1677ff",
                   color: "white",
