@@ -10,7 +10,7 @@ body{
 
 .login-card {
   width: 650px;
-  height: 350px;
+  height: 430px;
   padding: 40px;
   background-color: #1a1a1a;
   border-radius: 12px;
@@ -19,6 +19,7 @@ body{
 .login-card h2 {
   color: white;
   text-align: center;
+  font-weight: 1000;
 }
 
 .login-card input {
