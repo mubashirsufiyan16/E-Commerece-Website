@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Input, Form, Button } from "antd";
+import "../Login/login.css"
 
 function Login() {
   const navigate = useNavigate();
@@ -35,12 +36,7 @@ function Login() {
           >
           <Input type="password" placeholder="Enter Password.." />
           </Form.Item>
-        <Button style={{
-          padding:"30px",
-          fontSize:"24px",
-          fontFamily:"math"
-          
-        }} type="primary" htmlType="submit">
+        <Button type="primary" htmlType="submit">
           Login 
         </Button>
           </Form>

@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Card, Button, Result } from "antd";
 import { useState } from "react";
+import "../AddToCart/addToCart.css"
 
 interface CartProduct {
   id: number;
@@ -13,10 +14,11 @@ interface CartProduct {
 
 function AddToCart() {
   const navigate = useNavigate();
-
   const [cart, setCart] = useState<CartProduct[]>(() => {
-    return JSON.parse(localStorage.getItem("cartProduct") || "[]");
-  });
+  return JSON.parse(
+    localStorage.getItem("cartProduct") || "[]"
+  );
+});
 
   const updateCart = (updatedCart: CartProduct[]) => {
     setCart(updatedCart);
@@ -76,62 +78,31 @@ function AddToCart() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          padding: "10px",
-        }}
+      <div className="div-container"
       >
-        <Button
+        <button className="add-to-cart-Btn"
           onClick={moveToDashboard}
-          style={{
-            backgroundColor: "#1677ff",
-            color: "white",
-            fontSize: "20px",
-            padding: "20px",
-            borderRadius: "10px",
-          }}
+         
         >
           Back
-        </Button>
+        </button>
 
-        <Button
+        <button className="add-to-cart-Btn"
           onClick={goToCheckout}
-          style={{
-            backgroundColor: "#1677ff",
-            color: "white",
-            fontSize: "20px",
-            padding: "20px",
-            borderRadius: "10px",
-          }}
+          
         >
           Checkout
-        </Button>
+        </button>
       </div>
 
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          padding: "20px",
-        }}
+      <div className="cart-div"
       >
         {cart.map((product, index) => (
-          <Card
+          <Card className="cart-product"
             key={`${product.id}-${index}`}
-            style={{
-              width: 400,
-              border: "1px solid black",
-            }}
           >
             <p
-              style={{
-                fontSize: "22px",
-                fontWeight: 700,
-                textAlign: "center",
-              }}
+
             >
               {product.title}
             </p>
@@ -139,60 +110,44 @@ function AddToCart() {
             <img
               src={product.image}
               alt={product.title}
-              style={{
-                width: "100%",
-                borderRadius: "10px",
-              }}
             />
 
-            <div
-              style={{
-                fontSize: "20px",
-                fontWeight: 600,
-                textAlign: "center",
-              }}
+            <div className="card-bottom"
             >
               <p>Price: Rs. {product.price}</p>
               <p>Category: {product.category}</p>
 
-              <div>
                 <Button
                   onClick={() => decreaseQuantity(product.id)}
-                >
+                  >
                   -
                 </Button>
 
-                <span style={{ margin: "0 15px" }}>
+                <span >
                   {product.quantity}
                 </span>
 
                 <Button
                   onClick={() => increaseQuantity(product.id)}
-                >
+                  >
                   +
                 </Button>
+                  <div>
               </div>
             </div>
 
             <br />
 
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "center",
-              }}
+            <div className="remove-btn"
             >
-              <Button
+              <button
                 onClick={() => removeItem(product.id)}
                 style={{
-                  backgroundColor: "#1677ff",
-                  color: "white",
-                  fontSize: "18px",
-                  padding: "20px",
+                  
                 }}
               >
                 Remove Item
-              </Button>
+              </button>
             </div>
           </Card>
         ))}

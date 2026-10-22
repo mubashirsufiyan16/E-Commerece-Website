@@ -1,6 +1,6 @@
 import Navbar from "../components/Navbar/Navbar";
-import HeroBanner from "../components/HeroBanner";
-import Product from "./Product";
+import HeroBanner from "../HeroBanner/HeroBanner";
+import Product from "./product/Product";
 import { useEffect, useState } from "react";
 
 function Home() {

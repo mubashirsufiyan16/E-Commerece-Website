@@ -1,6 +1,7 @@
 import { Button, Input, Result } from "antd";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import "../CheckOut/CheckOut.css"
 
 function CheckOut() {
   const navigate = useNavigate();
@@ -162,40 +163,16 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
     <>
       {/* Navbar */}
 
-      <nav
-        style={{
-          backgroundColor: "white",
-          padding: "10px 20px",
-          borderRadius: "20px",
-          display: "flex",
-          alignItems: "center",
-          textTransform: "uppercase",
-          fontFamily: "math",
-          fontSize: "50px",
-          fontWeight: "1000",
-          margin: "20px",
-          boxShadow: "0 5px 20px rgba(0,0,0,0.15)",
-        }}
+      <nav className="checkout-nav"
       >
         <Button
           onClick={() => navigate("/AddToCart")}
           type="primary"
-          style={{
-            height: "50px",
-            padding: "0 25px",
-            fontSize: "20px",
-            borderRadius: "10px",
-            textTransform: "uppercase",
-          }}
         >
           Back
         </Button>
 
         <div
-          style={{
-            flex: 1,
-            textAlign: "center",
-          }}
         >
           Check Out Page
         </div>
@@ -204,97 +181,51 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
       {/* Main Container */}
 
       <div
-        style={{
-          padding: "30px 50px 50px",
-        }}
       >
-        <div
-          style={{
-            display: "flex",
-            alignItems: "flex-start",
-            gap: "35px",
-            maxWidth: "1200px",
-            margin: "0 auto",
-          }}
+        <div className="hero-div"
         >
           {/* User Information */}
 
-          <form
+          <form className="user-form"
             onSubmit={confirmOrder}
-            style={{
-              flex: 1,
-              backgroundColor: "white",
-              margin:"20px",
-              padding: "30px",
-              fontSize: "20px",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
-              borderRadius: "15px",
-              boxSizing: "border-box",
-            }}
           >
             <h3
-              style={{
-                fontFamily: "fantasy",
-                fontSize: "40px",
-                margin: "0 0 30px 0",
-                textAlign: "center",
-              }}
             >
               User Information
             </h3>
 
             {/* First Name + Last Name */}
 
-            <div
-              style={{
-                display: "flex",
-                gap: "20px",
-              }}
+            <div className="input-gap"
             >
-              <div style={{ flex: 1 }}>
-                <Input
+              <div>
+                <Input className="input"
                   name="firstName"
                   value={formData.firstName}
                   onChange={handleChange}
                   size="large"
                   placeholder="First Name"
-                  style={{
-                    marginBottom: "5px",
-                  }}
+                 
                 />
 
                 {errors.firstName && (
                   <p
-                    style={{
-                      color: "red",
-                      fontSize: "14px",
-                      margin: "0 0 10px",
-                    }}
                   >
                     {errors.firstName}
                   </p>
                 )}
-              </div>
-
-              <div style={{ flex: 1 }}>
-                <Input
+                </div>
+              <div>
+                <Input className="input"
                   name="lastName"
                   value={formData.lastName}
                   onChange={handleChange}
                   size="large"
                   placeholder="Last Name"
-                  style={{
-                    marginBottom: "5px",
-                  }}
                 />
 
                 {errors.lastName && (
                   <p
-                    style={{
-                      color: "red",
-                      fontSize: "14px",
-                      margin: "0 0 10px",
-                    }}
                   >
                     {errors.lastName}
                   </p>
@@ -304,24 +235,18 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
 
             {/* Address */}
 
-            <Input
+            <Input className="input"
               name="address"
               value={formData.address}
               onChange={handleChange}
               size="large"
               placeholder="Address"
-              style={{
-                marginBottom: "5px",
-              }}
+              
             />
 
             {errors.address && (
               <p
-                style={{
-                  color: "red",
-                  fontSize: "14px",
-                  margin: "0 0 10px",
-                }}
+               
               >
                 {errors.address}
               </p>
@@ -329,84 +254,60 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
 
             {/* Apartment */}
 
-            <Input
+            <Input className="input"
               name="apartment"
               value={formData.apartment}
               onChange={handleChange}
               size="large"
               placeholder="Apartment, suit, etc. (optional)"
-              style={{
-                marginBottom: "15px",
-              }}
             />
 
             {/* City + Postal Code */}
 
-            <div
-              style={{
-                display: "flex",
-                gap: "20px",
-              }}
+            <div className="input-gap"
             >
-              <div style={{ flex: 1 }}>
-                <Input
+              <div>
+                <Input className="input"
                   name="city"
                   value={formData.city}
                   onChange={handleChange}
                   size="large"
                   placeholder="City"
-                  style={{
-                    marginBottom: "5px",
-                  }}
                 />
 
                 {errors.city && (
                   <p
-                    style={{
-                      color: "red",
-                      fontSize: "14px",
-                      margin: "0 0 10px",
-                    }}
                   >
                     {errors.city}
                   </p>
                 )}
               </div>
 
-              <div style={{ flex: 1 }}>
-                <Input
+              <div >
+                <Input className="input"
                   name="postalCode"
                   value={formData.postalCode}
                   onChange={handleChange}
                   size="large"
                   placeholder="Postal Code (optional)"
-                  style={{
-                    marginBottom: "15px",
-                  }}
+                
                 />
               </div>
             </div>
 
             {/* Phone */}
 
-            <Input
+            <Input className="input"
               name="phone"
               value={formData.phone}
               onChange={handleChange}
               size="large"
               placeholder="Phone"
-              style={{
-                marginBottom: "5px",
-              }}
+              
             />
 
             {errors.phone && (
               <p
-                style={{
-                  color: "red",
-                  fontSize: "14px",
-                  margin: "0 0 10px",
-                }}
               >
                 {errors.phone}
               </p>
@@ -414,19 +315,13 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
 
             {/* Confirm Order */}
 
-            <Button
+            <Button className="confirm-btn"
               type="primary"
               htmlType="submit"
               size="large"
               onClick={() => navigate("/Order")}
               style={{
-                width: "100%",
-                height: "55px",
-                fontSize: "25px",
-                fontWeight: "bold",
-                fontFamily: "math",
-                borderRadius: "8px",
-                marginTop: "10px",
+               
               }}
             >
               Confirm Order
@@ -435,26 +330,11 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
 
           {/* Order Summary */}
 
-          <div
-            style={{
-              width: "450px",
-              backgroundColor: "white",
-              padding: "30px",
-              borderRadius: "15px",
-              boxShadow: "0 10px 30px rgba(0,0,0,0.18)",
-              boxSizing: "border-box",
-            }}
+          <div className="order-summary"
+            
           >
             <h2
-              style={{
-                margin: "0 0 25px",
-                fontSize: "28px",
-                fontFamily: "fangsong",
-                fontWeight: "1000",
-                textTransform: "uppercase",
-                borderBottom: "1px solid lightgray",
-                paddingBottom: "15px",
-              }}
+              
             >
               Order Summary
             </h2>
@@ -462,82 +342,37 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
             {/* Products */}
 
             {cart.map((product) => (
-              <div
+              <div className="product"
                 key={product.id}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "15px",
-                  padding: "15px 0",
-                  borderBottom: "1px solid lightgray",
-                }}
+              
               >
                 <div
-                  style={{
-                    width: "75px",
-                    height: "75px",
-                    borderRadius: "10px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    position: "relative",
-                  }}
                 >
-                  <img
+                  <img className="summary-img"
                     src={product.image}
                     alt={product.title}
-                    style={{
-                      width: "75px",
-                      height: "75px",
-                      objectFit: "contain",
-                      borderRadius: "18px",
-                    }}
+                    
                   />
                 </div>
 
-                <div
-                  style={{
-                    flex: 1,
-                  }}
+                <div className="summary-details"
+                  
                 >
-                  <p
-                    style={{
-                      margin: "0 0 6px",
-                      fontSize: "17px",
-                      fontWeight: "bold",
-                    }}
-                  >
+                  <p>
                     {product.title}
                   </p>
 
                   <p
-                    style={{
-                      color: "gray",
-                      fontFamily: "math",
-                      fontWeight: "500",
-                      fontSize: "17px",
-                      margin: "5px 0",
-                    }}
                   >
                     Quantity: {product.quantity}
                   </p>
 
-                  <p
-                    style={{
-                      color: "gray",
-                      fontSize: "15px",
-                      margin: "5px 0",
-                    }}
-                  >
+                  <p>
                     Price: Rs. {product.price.toLocaleString()}
                   </p>
                 </div>
 
-                <div
-                  style={{
-                    fontSize: "16px",
-                    fontWeight: "600",
-                  }}
+                <div className="rs-div"
                 >
                   Rs.{" "}
                   {(
@@ -549,75 +384,34 @@ const [cart, setCart] = useState<CartProduct[]>(() => {
 
             {/* Cost Summary */}
 
-            <div
-              style={{
-                borderTop: "1px solid lightgray",
-                marginTop: "25px",
-                paddingTop: "20px",
-              }}
+            <div className="cost-summary"
             >
               <h3
-                style={{
-                  margin: "0 0 20px",
-                  fontSize: "20px",
-                  fontWeight: "600",
-                }}
+               
               >
                 Cost Summary
               </h3>
 
-              <p
-                style={{
-                  margin: "12px 0",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "20px",
-                }}
-              >
+              <p>
                 <span>Subtotal:</span>
                 <span>Rs. {subtotal.toLocaleString()}</span>
               </p>
 
-              <p
-                style={{
-                  margin: "12px 0",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  fontSize: "20px",
-                }}
-              >
+              <p>
                 <span>Shipping:</span>
                 <span>Rs. {shipping.toFixed(2)}</span>
               </p>
 
               {/* Total */}
 
-              <div
-                style={{
-                  borderTop: "1px solid lightgray",
-                  marginTop: "20px",
-                  paddingTop: "20px",
-                  display: "flex",
-                  justifyContent: "space-between",
-                  alignItems: "center",
-                }}
+              <div className="total-cost"
+              
               >
-                <span
-                  style={{
-                    fontSize: "38px",
-                    fontWeight: "1000",
-                    fontFamily: "fangsong",
-                  }}
-                >
+                <span className="span-total">
                   Total
                 </span>
 
-                <span
-                  style={{
-                    fontSize: "25px",
-                    fontWeight: "700",
-                  }}
-                >
+                <span className="amount-span">
                   Rs. {totalPrice.toLocaleString()}
                 </span>
               </div>

@@ -1,7 +1,7 @@
 import { Card, Button, Modal } from "antd";
 import { useState } from "react";
-import "../App.css";
-import products from "../data/Products";
+import "../product/product.css";
+import products from "../../data/Products";
 
 interface ProductType {
   id: number;
@@ -71,35 +71,25 @@ function Product({ product = products,setQuantity }: ProductProps) {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          gap: "20px",
-          padding: "20px",
-        }}
+      <div className="product-div"
       >
         {product.map((item: ProductType) => (
-          <Card
+          <Card className="product-card"
             key={item.id}
             title={item.title}
-            style={{ width: 300, border: "1px solid black" }}
           >
-            <img
+            <img className="product-img"
               src={item.image}
               alt={item.title}
-              style={{ width: "100%", borderRadius: "10px" }}
             />
-
             <p>Price: Rs. {item.price}</p>
             <p>Category: {item.category}</p>
 
-            <Button
-              type="primary"
+            <button className="product-btn"
               onClick={() => handleAddToCart(item)}
             >
               Product Details
-            </Button>
+            </button>
           </Card>
         ))}
       </div>
@@ -127,7 +117,7 @@ function Product({ product = products,setQuantity }: ProductProps) {
               -
             </Button>
 
-            <span style={{ margin: "0 15px" }}>{productQuantity}</span>
+            <span  style={{ margin: "0 15px" }}>{productQuantity}</span>
 
             <Button onClick={() => setProductQuantity((prev) => prev + 1)}>
               +

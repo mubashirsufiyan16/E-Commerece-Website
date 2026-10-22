@@ -2,10 +2,10 @@ import "./App.css";
 import { BrowserRouter, Routes, Route,Navigate } from "react-router-dom";
 import Login from "./pages/Login/Login";
 import Home from "./pages/Home";
-import CheckOut from "./pages/CheckOut";
+import CheckOut from "./CheckOut/CheckOut";
 import Order from "./pages/Order"
-import AddToCart from "./pages/AddToCart";
-import Product from "./pages/Product";
+import AddToCart from "./AddToCart/AddToCart";
+import Product from "./pages/product/Product";
 import NotFound from "./components/NotFound"
 import products from "./data/Products";
 

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Button, Badge } from "antd";
 import { useEffect, useState } from "react";
-import "../../App.css";
+import "../Navbar/navbar.css";
 
 interface CartProduct {
   id: number;
@@ -66,20 +66,15 @@ function Navbar({quantity} :NavbarProps) {
       </ul>
 
       <div>
-        <Button
+        <button
           style={{
-            backgroundColor: "#1677ff",
-            color: "white",
-            fontSize: "30px",
-            padding: "20px",
-            fontFamily: "math",
-            textTransform: "capitalize",
+            
           }}
           onClick={handleLogOut}
-          id="logoutbtn"
+          className="logoutbtn"
         >
           Logout
-        </Button>
+        </button>
 
         <Badge count={badgeValue}>
           <Button
