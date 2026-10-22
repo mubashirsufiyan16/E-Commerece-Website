@@ -1,0 +1,36 @@
+.nav {
+  background: linear-gradient(135deg, #111, #333);
+  color: white;
+  margin: 4px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+.nav h3 {
+  cursor: pointer;
+}
+.buttons {
+  font-size: 20px;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 9px;
+  background-color: rgb(37, 164, 243);
+  color: white;
+  cursor: pointer;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-weight: 1000;
+}
+.logoutbtn {
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 26px;
+  transition: 0.3s;
+  position: absolute;
+  right: 20px;
+   background-color:#1677FF;
+  color:white;
+  font-size: "30px";
+}

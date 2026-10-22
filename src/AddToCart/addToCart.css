@@ -1,0 +1,67 @@
+.div-container {
+  display: "flex";
+  justify-content: "space-between";
+  padding: "10px";
+}
+.add-to-cart-Btn {
+  background-color: #1677ff;
+  color: white;
+  padding: 7px;
+  font-size: 20px;
+  border: none;
+  border-radius: 10px;
+  margin: 5px;
+  height: auto;
+  width: auto;
+  margin: 20px 0px 30px 20px;
+  cursor: pointer;
+}
+.cart-div{
+    display: "flex";
+    flex-wrap: "wrap";
+    gap: "20px";
+    padding: "20px";
+    margin: 10px;
+}
+.cart-product{
+    width: 20%;
+    border: 1px solid gray;
+}
+.cart-product :hover{
+    transition: 0.9s ease;
+    cursor: pointer;
+    transform: scale(1.02);
+}
+.cart-div p{
+    font-size: "22px";
+    font-weight: 700;
+    text-align: "center",
+            
+}
+.cart-div img{
+    width: 100%;
+    border-radius: "10px",
+}
+.card-bottom{
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+}
+.card-bottom span{
+    margin: 0 15px;
+}
+.remove-btn{
+    display: "flex";
+    justify-content: center;
+    text-align: center;
+}
+.remove-btn button{
+    background-color: #1677ff;
+    color: white;
+    font-size: 18px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+   
+}
